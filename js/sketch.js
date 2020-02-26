@@ -5,11 +5,16 @@ function setup() {
 }
 
 function draw() {
-  fill(255);
-  rect(mouseX, mouseY, 50, 50);
+  if (mouseIsPressed) {
+    ellipse(mouseX, mouseY, 30, 30);
+  }
 }
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
   background(0);
+}
+
+function mousePressed() {
+  fill(random(0, 255), random(0, 255), random(0, 255));
 }
