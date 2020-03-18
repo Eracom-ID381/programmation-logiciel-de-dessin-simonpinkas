@@ -1,12 +1,19 @@
+let osc, freq, amp;
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   background(0);
-  noStroke();
+  osc = new p5.Oscillator('square');
 }
 
 function draw() {
+  strokeWeight(10);
+  freq = map(mouseX, 0, width, 100, 1000);
+  amp = map(mouseY, 0, height, 0, 1);
   if (mouseIsPressed) {
-    ellipse(mouseX, mouseY, 30, 30);
+    osc.freq(freq, 0.1);
+    osc.amp(amp, 0.1);
+    line(mouseX, mouseY, pmouseX, pmouseY);
   }
 }
 
@@ -16,5 +23,16 @@ function windowResized() {
 }
 
 function mousePressed() {
-  fill(random(0, 255), random(0, 255), random(0, 255));
+  osc.start();
+  stroke(random(0, 255), random(0, 255), random(0, 255));
+}
+
+function keyPressed() {
+  if (keyCode === BACKSPACE) {
+    background(0);
+  }
+}
+
+function mouseReleased() {
+  osc.stop();
 }
